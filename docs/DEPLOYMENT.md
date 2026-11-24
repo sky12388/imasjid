@@ -1,5 +1,15 @@
 # Deployment
 
+## Current production deployment
+
+- **Platform:** Vercel (project `skywalker7/imasjid`, connected to `sky12388/imasjid`)
+- **Live URL:** https://imasjid-theta.vercel.app
+- **RGB showcase:** https://imasjid-theta.vercel.app/rgb
+- `NEXT_PUBLIC_SITE_URL` is set to the live URL; deployment protection (SSO) is disabled so anyone
+  nationwide can browse.
+
+Redeploy with `npx vercel --prod --yes` from this folder.
+
 ## 1. Prepare the repo
 
 The folder is standalone — no monorepo config and no e-Solat dependency.
