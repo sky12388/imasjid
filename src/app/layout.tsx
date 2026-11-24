@@ -59,6 +59,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ms">
       <body>
+        {/* Capture the install event before React hydrates so an early-fired prompt is not lost. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__imasjidInstallPrompt=e;});",
+          }}
+        />
         <PwaInstallProvider>
           <ServiceWorkerRegister />
           {children}

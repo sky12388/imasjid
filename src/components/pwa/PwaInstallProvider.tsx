@@ -20,6 +20,12 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+declare global {
+  interface Window {
+    __imasjidInstallPrompt?: BeforeInstallPromptEvent;
+  }
+}
+
 export type InstallState =
   | "checking"
   | "installable"
@@ -88,17 +94,27 @@ export function PwaInstallProvider({ children }: { children: ReactNode }) {
       return;
     }
 
+    // An inline script in the root layout may have captured the event before hydration.
+    const earlyPrompt = window.__imasjidInstallPrompt;
+    if (earlyPrompt) {
+      deferredPrompt.current = earlyPrompt;
+      setState("installable");
+    }
+
     let fallbackTimer: number | undefined;
 
     const onBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
-      deferredPrompt.current = event as BeforeInstallPromptEvent;
+      const promptEvent = event as BeforeInstallPromptEvent;
+      deferredPrompt.current = promptEvent;
+      window.__imasjidInstallPrompt = promptEvent;
       setState("installable");
       if (fallbackTimer) window.clearTimeout(fallbackTimer);
     };
 
     const onAppInstalled = () => {
       deferredPrompt.current = null;
+      window.__imasjidInstallPrompt = undefined;
       setState("installed");
     };
 
@@ -123,6 +139,7 @@ export function PwaInstallProvider({ children }: { children: ReactNode }) {
     await event.prompt();
     const choice = await event.userChoice;
     deferredPrompt.current = null;
+    window.__imasjidInstallPrompt = undefined;
 
     if (choice.outcome === "accepted") setState("installed");
     return choice.outcome;
