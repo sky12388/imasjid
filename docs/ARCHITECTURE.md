@@ -33,7 +33,7 @@ dedicated, independently-sourced schedule adapter is chosen.
 
 ## Why a PWA instead of native store apps
 
-- No Play Store / App Store review friction for a small community rollout.
+- No Play Store / App Store review delays for a small community rollout.
 - One codebase for Android, iOS and desktop, served over HTTPS from Vercel or Firebase Hosting.
 - `beforeinstallprompt` gives Android/Chrome a one-tap native install sheet.
 - iOS Safari cannot use `beforeinstallprompt`, so the landing page detects iOS and shows the

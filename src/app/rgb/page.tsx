@@ -188,9 +188,10 @@ export default function RgbShowcasePage() {
 
         <section className={styles.section} id="pasang">
           <div className={styles.sectionInner}>
-            <h2 className={styles.sectionTitle}>Pasang tanpa geseran</h2>
+            <h2 className={styles.sectionTitle}>Pasang dengan mudah</h2>
             <p className={styles.sectionLead}>
-              Sama seperti edisi Emerald, logik pemasangan pintar kekal aktif pada halaman ini.
+              Sama seperti edisi Emerald, anda boleh pasang terus dari laman web ini — pada Android
+              mahupun iPhone.
             </p>
             <div className={styles.steps}>
               {steps.map((step, index) => (
