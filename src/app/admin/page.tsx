@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useAdminSession } from "@/components/admin/AdminAuthGuard";
 import {
   CalendarIcon,
   CheckIcon,
   CommunityIcon,
+  MosqueIcon,
   WheelchairIcon,
 } from "@/components/icons/Icons";
 import { DEMO_MOSQUES } from "@/data/mock";
 import { FACILITY_LABELS } from "@/lib/labels";
+import { mosqueOptions } from "@/lib/mosque";
 import type {
   AnnouncementDraft,
   FacilityKey,
@@ -39,11 +42,32 @@ const emptyAnnouncement: AnnouncementDraft = {
   mosque: DEMO_MOSQUES[0].name,
 };
 
+interface RenameDraft {
+  mosqueId: string;
+  localName: string;
+  area: string;
+  district: string;
+  state: string;
+}
+
 export default function AdminPage() {
+  const { mosqueIds } = useAdminSession();
+  const scopedMosques = mosqueOptions(DEMO_MOSQUES, mosqueIds);
+
   const [lecture, setLecture] = useState<LectureDraft>(emptyLecture);
   const [facility, setFacility] = useState<FacilityUpdateDraft>(emptyFacility);
   const [announcement, setAnnouncement] = useState<AnnouncementDraft>(emptyAnnouncement);
   const [message, setMessage] = useState<string | null>(null);
+  const [rename, setRename] = useState<RenameDraft>(() => {
+    const first = scopedMosques[0];
+    return {
+      mosqueId: first?.id ?? "",
+      localName: "",
+      area: first?.area ?? "",
+      district: first?.district ?? "",
+      state: first?.state ?? "",
+    };
+  });
 
   function saved(label: string) {
     setMessage(`${label} diterima (demo). Sambungan Firestore akan disediakan seterusnya.`);
@@ -67,6 +91,12 @@ export default function AdminPage() {
     setAnnouncement(emptyAnnouncement);
   }
 
+  function submitRename(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    saved("Nama & lokasi masjid");
+    setRename((current) => ({ ...current, localName: "", area: "", district: "", state: "" }));
+  }
+
   function toggleFacility(key: FacilityKey) {
     setFacility((current) => ({
       ...current,
@@ -80,10 +110,80 @@ export default function AdminPage() {
     <>
       <div className="page-heading">
         <h1>Portal AJK Masjid</h1>
-        <p>Kemas kini kuliah, kemudahan dan pengumuman kariah untuk dilihat oleh umum.</p>
+        <p>
+          iMasjid digunakan di seluruh negara. AJK hanya menyesuaikan nama paparan dan maklumat
+          masjid / surau lokal mereka — ID nasional kekal tidak berubah.
+        </p>
       </div>
 
       {message && <div className="notice">{message}</div>}
+
+      <div className="panel" style={{ marginTop: "1rem" }}>
+        <h2>
+          <MosqueIcon width={22} height={22} /> Nama & Lokasi Masjid / Surau
+        </h2>
+        <p style={{ color: "var(--muted)", marginTop: "0.4rem" }}>
+          Nama paparan ini yang dilihat orang awam dalam carian berdekatan. Nama rasmi dan ID
+          nasional tidak diubah oleh AJK tempatan.
+        </p>
+        <form className="form-grid" style={{ marginTop: "1.2rem" }} onSubmit={submitRename}>
+          <div className="field">
+            <label htmlFor="rename-mosque">Masjid / surau anda</label>
+            <select
+              id="rename-mosque"
+              className="select"
+              value={rename.mosqueId}
+              onChange={(event) => setRename({ ...rename, mosqueId: event.target.value })}
+            >
+              {scopedMosques.map((mosque) => (
+                <option key={mosque.id} value={mosque.id}>
+                  {mosque.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label htmlFor="rename-local">Nama paparan tempatan</label>
+            <input
+              id="rename-local"
+              className="input"
+              value={rename.localName}
+              onChange={(event) => setRename({ ...rename, localName: event.target.value })}
+              placeholder="Contoh: Masjid Al-Hidayah — Bukit Rimau"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="rename-area">Kawasan / bandar</label>
+            <input
+              id="rename-area"
+              className="input"
+              value={rename.area}
+              onChange={(event) => setRename({ ...rename, area: event.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="rename-district">Daerah</label>
+            <input
+              id="rename-district"
+              className="input"
+              value={rename.district}
+              onChange={(event) => setRename({ ...rename, district: event.target.value })}
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="rename-state">Negeri</label>
+            <input
+              id="rename-state"
+              className="input"
+              value={rename.state}
+              onChange={(event) => setRename({ ...rename, state: event.target.value })}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary">
+            <CheckIcon width={18} height={18} /> Simpan nama & lokasi
+          </button>
+        </form>
+      </div>
 
       <div className="panel" style={{ marginTop: "1rem" }}>
         <h2>
@@ -119,7 +219,7 @@ export default function AdminPage() {
               value={lecture.mosque}
               onChange={(event) => setLecture({ ...lecture, mosque: event.target.value })}
             >
-              {DEMO_MOSQUES.map((mosque) => (
+              {scopedMosques.map((mosque) => (
                 <option key={mosque.id} value={mosque.name}>
                   {mosque.name}
                 </option>
@@ -165,7 +265,7 @@ export default function AdminPage() {
               value={facility.mosqueId}
               onChange={(event) => setFacility({ ...facility, mosqueId: event.target.value })}
             >
-              {DEMO_MOSQUES.map((mosque) => (
+              {scopedMosques.map((mosque) => (
                 <option key={mosque.id} value={mosque.id}>
                   {mosque.name}
                 </option>
@@ -215,7 +315,7 @@ export default function AdminPage() {
               value={announcement.mosque}
               onChange={(event) => setAnnouncement({ ...announcement, mosque: event.target.value })}
             >
-              {DEMO_MOSQUES.map((mosque) => (
+              {scopedMosques.map((mosque) => (
                 <option key={mosque.id} value={mosque.name}>
                   {mosque.name}
                 </option>

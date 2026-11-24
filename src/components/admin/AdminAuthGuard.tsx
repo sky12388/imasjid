@@ -7,12 +7,35 @@ import {
   signOut,
   type User,
 } from "firebase/auth";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 import { AJK_ROLES, auth, isFirebaseConfigured } from "@/lib/firebase";
 
 interface Session {
   user: User;
   role: string;
+  /** Nationwide mosque IDs this AJK account is allowed to manage. Empty = all (superadmin). */
+  mosqueIds: string[];
+}
+
+export interface AdminSessionValue {
+  user: User;
+  role: string;
+  mosqueIds: string[];
+}
+
+const AdminSessionContext = createContext<AdminSessionValue | null>(null);
+
+export function useAdminSession(): AdminSessionValue {
+  const context = useContext(AdminSessionContext);
+  if (!context) throw new Error("useAdminSession must be used inside <AdminAuthGuard>");
+  return context;
 }
 
 export function AdminAuthGuard({ children }: { children: ReactNode }) {
@@ -38,9 +61,13 @@ export function AdminAuthGuard({ children }: { children: ReactNode }) {
 
       try {
         const token = await getIdTokenResult(user);
-        setSession({ user, role: String(token.claims.role ?? "") });
+        const claims = token.claims;
+        const mosqueIds = Array.isArray(claims.mosqueIds)
+          ? claims.mosqueIds.map(String)
+          : [];
+        setSession({ user, role: String(claims.role ?? ""), mosqueIds });
       } catch {
-        setSession({ user, role: "" });
+        setSession({ user, role: "", mosqueIds: [] });
       }
       setLoading(false);
     });
@@ -144,7 +171,9 @@ export function AdminAuthGuard({ children }: { children: ReactNode }) {
   }
 
   return (
-    <>
+    <AdminSessionContext.Provider
+      value={{ user: session.user, role: session.role, mosqueIds: session.mosqueIds }}
+    >
       <div className="admin-bar">
         <div>
           <strong>Disahkan sebagai AJK</strong>
@@ -155,6 +184,6 @@ export function AdminAuthGuard({ children }: { children: ReactNode }) {
         </button>
       </div>
       {children}
-    </>
+    </AdminSessionContext.Provider>
   );
 }

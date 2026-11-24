@@ -8,11 +8,17 @@ export type FacilityKey =
   | "accessibleRoute";
 
 export interface Mosque {
+  /** Stable nationwide identifier — never changed by a local AJK. */
   id: string;
+  /** Canonical / official name from the national registry. */
   name: string;
+  /** Local display name set by the mosque AJK (e.g. "Masjid Al-Hidayah — Bukit Rimau"). */
+  localName?: string;
   type: "masjid" | "surau";
   address: string;
   area: string;
+  district: string;
+  state: string;
   lat: number;
   lng: number;
   facilities: FacilityKey[];

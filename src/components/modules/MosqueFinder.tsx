@@ -21,6 +21,7 @@ import {
 } from "@/lib/geo";
 import { formatDate } from "@/lib/format";
 import { FACILITY_LABELS } from "@/lib/labels";
+import { displayName, localityLabel } from "@/lib/mosque";
 import type { FacilityKey, MosqueWithDistance } from "@/types";
 
 const facilityIcons: Record<FacilityKey, ReactNode> = {
@@ -90,6 +91,12 @@ export function MosqueFinder() {
             sebenar.
           </div>
         )}
+        {!coords && !usingDemoCenter && (
+          <div className="notice" style={{ marginTop: error ? "0.75rem" : 0 }}>
+            iMasjid digunakan di seluruh negara. Ini ialah senarai contoh nasional — tekan{" "}
+            <strong>Guna lokasi saya</strong> untuk menyenaraikan masjid berdekatan anda.
+          </div>
+        )}
 
         <div style={{ marginTop: "1.25rem" }}>
           <h2 style={{ fontSize: "1.05rem", marginBottom: "0.6rem" }}>Jarak maksimum</h2>
@@ -147,10 +154,10 @@ export function MosqueFinder() {
             <article className="list-item" key={mosque.id}>
               <div className="list-item__top">
                 <div>
-                  <h3>{mosque.name}</h3>
+                  <h3>{displayName(mosque)}</h3>
                   <div className="meta" style={{ marginTop: "0.3rem" }}>
                     <span>
-                      <PinIcon width={16} height={16} /> {mosque.area}
+                      <PinIcon width={16} height={16} /> {localityLabel(mosque)}
                     </span>
                     {coords && <span>{formatDistance(mosque.distanceM)} dari anda</span>}
                   </div>
@@ -175,7 +182,7 @@ export function MosqueFinder() {
               <div className="form-actions">
                 <a
                   className="btn btn-quiet"
-                  href={mapsUrl(mosque.lat, mosque.lng, mosque.name)}
+                  href={mapsUrl(mosque.lat, mosque.lng, displayName(mosque))}
                   target="_blank"
                   rel="noreferrer"
                 >

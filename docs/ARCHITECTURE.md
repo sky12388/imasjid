@@ -4,6 +4,19 @@
 
 Scaffold accepted. Project lives at `/home/ma/Documents/imasjid`, a sibling of `esolat-v6`.
 
+## Decision: nationwide, open-to-all platform
+
+iMasjid is **not** a single-mosjid app. One national deployment serves every masjid and surau:
+
+- Anyone can browse any mosque, program, speaker or kariah notice without an account.
+- Each mosque/surau has a stable national `id` and canonical `name` that local AJK never edit.
+- A local AJK only sets `localName`, `area`, `district`, `state` and facility details for their own
+  record — effectively "renaming the masjid/surau according to their location".
+- Distance filtering happens in the visitor's browser, so the same nationwide dataset works for
+  someone in Johor and someone in Selangor.
+- AJK access is scoped with a `mosqueIds` custom claim; an account can only manage the mosques
+  listed there. Superadmins may leave it empty to manage all.
+
 ## Decision: full decoupling from e-Solat
 
 iMasjid is a separate Next.js application with its own package manifest, git history, deployment,

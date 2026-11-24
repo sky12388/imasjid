@@ -1,13 +1,19 @@
 import type { CommunityPost, Mosque, ProgramItem, Speaker } from "@/types";
 
-/** Demo data only — replace with Firestore / CMS reads in production. */
+/**
+ * Demo data only — replace with a nationwide Firestore / CMS collection in production.
+ * `id` is stable nationally; `localName` is the only field a local AJK should rename.
+ */
 export const DEMO_MOSQUES: Mosque[] = [
   {
     id: "masjid-tengku-kelah",
     name: "Masjid Tengku Kelana Jaya Putera",
+    localName: "Masjid Tengku Kelana Jaya Putera — Shah Alam",
     type: "masjid",
     address: "Jalan Kelab Golf 13/6, Shah Alam, Selangor",
     area: "Shah Alam",
+    district: "Petaling",
+    state: "Selangor",
     lat: 3.0738,
     lng: 101.5179,
     facilities: ["parking", "oku", "aircond", "kuliahHall", "wudhu", "womenSpace"],
@@ -19,6 +25,8 @@ export const DEMO_MOSQUES: Mosque[] = [
     type: "surau",
     address: "Seksyen 7, Shah Alam, Selangor",
     area: "Seksyen 7",
+    district: "Petaling",
+    state: "Selangor",
     lat: 3.0875,
     lng: 101.4971,
     facilities: ["parking", "aircond", "wudhu", "womenSpace"],
@@ -30,6 +38,8 @@ export const DEMO_MOSQUES: Mosque[] = [
     type: "masjid",
     address: "Jalan Semabat, Section 14, Shah Alam",
     area: "Seksyen 14",
+    district: "Petaling",
+    state: "Selangor",
     lat: 3.0567,
     lng: 101.4872,
     facilities: ["parking", "oku", "kuliahHall", "wudhu", "accessibleRoute"],
@@ -38,9 +48,12 @@ export const DEMO_MOSQUES: Mosque[] = [
   {
     id: "surau-al-hidayah",
     name: "Surau Al-Hidayah Bukit Rimau",
+    localName: "Surau Al-Hidayah — Bukit Rimau",
     type: "surau",
     address: "Bukit Rimau, Shinjang, Selangor",
     area: "Bukit Rimau",
+    district: "Klang",
+    state: "Selangor",
     lat: 3.0142,
     lng: 101.5561,
     facilities: ["parking", "oku", "aircond", "kuliahHall"],
@@ -52,10 +65,38 @@ export const DEMO_MOSQUES: Mosque[] = [
     type: "masjid",
     address: "Jalan Putra Indah 3/5, Putra Heights",
     area: "Putra Heights",
+    district: "Petaling",
+    state: "Selangor",
     lat: 2.9954,
     lng: 101.5647,
     facilities: ["parking", "oku", "aircond", "kuliahHall", "wudhu", "womenSpace", "accessibleRoute"],
     updatedAt: "2026-11-21",
+  },
+  {
+    id: "masjid-negara",
+    name: "Masjid Negara Malaysia",
+    type: "masjid",
+    address: "Jalan Perdana, Kuala Lumpur",
+    area: "Kuala Lumpur",
+    district: "Kuala Lumpur",
+    state: "Wilayah Persekutuan Kuala Lumpur",
+    lat: 3.1458,
+    lng: 101.6929,
+    facilities: ["parking", "oku", "aircond", "kuliahHall", "wudhu", "womenSpace", "accessibleRoute"],
+    updatedAt: "2026-11-19",
+  },
+  {
+    id: "masjid-sultan-abu-bakar",
+    name: "Masjid Sultan Abu Bakar",
+    type: "masjid",
+    address: "Jalan Gertak Merah, Johor Bahru, Johor",
+    area: "Johor Bahru",
+    district: "Johor Bahru",
+    state: "Johor",
+    lat: 1.4586,
+    lng: 103.7644,
+    facilities: ["parking", "oku", "kuliahHall", "wudhu", "womenSpace"],
+    updatedAt: "2026-11-17",
   },
 ];
 

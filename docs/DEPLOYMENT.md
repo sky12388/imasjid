@@ -40,19 +40,36 @@ navigation, and ensure `/sw.js` is served with `Cache-Control: public, max-age=0
 3. Grant the custom claim via Admin SDK / a trusted Cloud Function:
 
 ```js
-await admin.auth().setCustomUserClaims(uid, { role: "ajk" });
+await admin.auth().setCustomUserClaims(uid, {
+  role: "ajk",
+  mosqueIds: ["masjid-tengku-kelah"], // only this mosque may be renamed/updated
+});
 ```
 
 Allowed roles are `ajk`, `admin`, `superadmin` (see `src/lib/firebase.ts`). The client guard reads
-`role` from `getIdTokenResult(user).claims`; the same check **must** be enforced in Firestore rules.
+`role` and `mosqueIds` from `getIdTokenResult(user).claims`; the same checks **must** be repeated in
+Firestore rules. A superadmin may omit `mosqueIds` to manage the whole national directory.
+
+AJK users should only change a mosque's `localName`, `area`, `district`, `state` and facilities.
+The stable national `id` and canonical `name` are read-only.
 
 Example rule sketch:
 
 ```rules
+function isAjk() {
+  return request.auth != null &&
+         request.auth.token.role in ['ajk', 'admin', 'superadmin'];
+}
+
+function manages(id) {
+  return request.auth.token.role == 'superadmin' ||
+         (request.auth.token.mosqueIds is list &&
+          id in request.auth.token.mosqueIds);
+}
+
 match /programs/{id} {
   allow read: if resource.data.published == true;
-  allow write: if request.auth != null &&
-                 request.auth.token.role in ['ajk', 'admin', 'superadmin'];
+  allow write: if isAjk() && manages(resource.data.mosqueId);
 }
 ```
 

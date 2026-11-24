@@ -1,7 +1,9 @@
 # iMasjid
 
-Standalone, mobile-first community mosque platform. A public install landing page plus a
-Next.js PWA that works from the phone home screen — no Play Store / App Store required.
+Standalone, mobile-first community mosque platform. One nationwide deployment that anyone can
+browse; local AJK only rename and maintain their own masjid/surau record. Includes a public install
+landing page plus a Next.js PWA that works from the phone home screen — no Play Store / App Store
+required.
 
 > **Boundary:** This project is 100% independent from `esolat-v6`. It does not import,
 > call, deploy to, or share state with the kiosk system. See `docs/ARCHITECTURE.md`.

@@ -1,0 +1,53 @@
+[debug] [2026-11-24T08:39:53.009Z] ----------------------------------------------------------------------
+[debug] [2026-11-24T08:39:53.011Z] Command:       /usr/bin/node /home/ma/.local/bin/firebase projects:create imasjid --display-name iMasjid
+[debug] [2026-11-24T08:39:53.011Z] CLI Version:   15.32.1
+[debug] [2026-11-24T08:39:53.011Z] Platform:      linux
+[debug] [2026-11-24T08:39:53.011Z] Node Version:  v20.19.2
+[debug] [2026-11-24T08:39:53.011Z] Detected Agent: opencode
+[debug] [2026-11-24T08:39:53.011Z] Time:          Tue Nov 24 2026 16:39:53 GMT+0800 (Malaysia Time)
+[debug] [2026-11-24T08:39:53.011Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-11-24T08:39:53.016Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-11-24T08:39:53.016Z] > authorizing via signed-in user (eddiekarpov@gmail.com)
+[debug] [2026-11-24T08:39:53.031Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:39:53.031Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:39:53.033Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-11-24T08:39:53.033Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"imasjid","name":"iMasjid"}
+[debug] [2026-11-24T08:39:54.897Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 409
+[debug] [2026-11-24T08:39:54.897Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"error":{"code":409,"message":"Requested entity already exists","status":"ALREADY_EXISTS"}}
+[debug] [2026-11-24T08:39:55.844Z] FirebaseError: Request to https://cloudresourcemanager.googleapis.com/v1/projects had HTTP Error: 409, Requested entity already exists
+    at responseToError (/home/ma/.local/node_modules/firebase-tools/lib/responseToError.js:53:12)
+    at RetryOperation._fn (/home/ma/.local/node_modules/firebase-tools/lib/apiv2.js:415:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to create project because there is already a project with ID imasjid. Please try again with a unique project ID.
+[debug] [2026-11-24T08:40:02.664Z] ----------------------------------------------------------------------
+[debug] [2026-11-24T08:40:02.666Z] Command:       /usr/bin/node /home/ma/.local/bin/firebase projects:create imasjid-community --display-name iMasjid
+[debug] [2026-11-24T08:40:02.666Z] CLI Version:   15.32.1
+[debug] [2026-11-24T08:40:02.666Z] Platform:      linux
+[debug] [2026-11-24T08:40:02.666Z] Node Version:  v20.19.2
+[debug] [2026-11-24T08:40:02.666Z] Detected Agent: opencode
+[debug] [2026-11-24T08:40:02.667Z] Time:          Tue Nov 24 2026 16:40:02 GMT+0800 (Malaysia Time)
+[debug] [2026-11-24T08:40:02.667Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-11-24T08:40:02.671Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-11-24T08:40:02.671Z] > authorizing via signed-in user (eddiekarpov@gmail.com)
+[debug] [2026-11-24T08:40:02.687Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:40:02.687Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:40:02.688Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-11-24T08:40:02.688Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"imasjid-community","name":"iMasjid"}
+[debug] [2026-11-24T08:40:05.256Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-11-24T08:40:05.256Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.4808525827421998849"}
+[debug] [2026-11-24T08:40:05.257Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:40:05.257Z] Checked if tokens are valid: true, expires at: 1795513173753
+[debug] [2026-11-24T08:40:05.257Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4808525827421998849 [none]
+[debug] [2026-11-24T08:40:06.476Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4808525827421998849 200
+[debug] [2026-11-24T08:40:06.476Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4808525827421998849 {"name":"operations/create_project.global.4808525827421998849","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":8,"message":"The project cannot be created because you have exceeded your allotted project quota.","details":[{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"description":"The project cannot be created because you have exceeded your allotted project quota."}]}]}}
+[debug] [2026-11-24T08:40:06.815Z] FirebaseError: The project cannot be created because you have exceeded your allotted project quota.
+    at OperationPoller.poll (/home/ma/.local/node_modules/firebase-tools/lib/operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async createCloudProject (/home/ma/.local/node_modules/firebase-tools/lib/management/projects.js:237:29)
+    at async createFirebaseProjectAndLog (/home/ma/.local/node_modules/firebase-tools/lib/management/projects.js:102:9)
+    at async /home/ma/.local/node_modules/firebase-tools/lib/command.js:280:28
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
