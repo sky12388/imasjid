@@ -1,0 +1,95 @@
+{
+  "id": "/",
+  "name": "iMasjid — Komuniti Masjid & Surau",
+  "short_name": "iMasjid",
+  "description": "Cari masjid berdekatan, ikut kuliah & program, semak direktori penceramah bertauliah, dan hubungi komuniti kariah — terus dari skrin utama telefon anda.",
+  "lang": "ms",
+  "dir": "ltr",
+  "start_url": "/app?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#04140f",
+  "theme_color": "#04140f",
+  "categories": ["lifestyle", "social", "education", "travel"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cari Masjid Berdekatan",
+      "short_name": "Cari Masjid",
+      "description": "Senaraikan masjid dan surau sekitar anda.",
+      "url": "/app/mosques?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Kuliah & Program",
+      "short_name": "Kuliah",
+      "description": "Kuliah, program dan pengumuman terdekat.",
+      "url": "/app/programs?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Direktori Penceramah",
+      "short_name": "Penceramah",
+      "description": "Penceramah bertauliah mengikut negeri.",
+      "url": "/app/speakers?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Hub Kariah",
+      "short_name": "Kariah",
+      "description": "Niaga, sosial dan sukarelawan kariah.",
+      "url": "/app/community?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Halaman utama iMasjid pada telefon"
+    },
+    {
+      "src": "/screenshots/home-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "iMasjid pada skrin besar"
+    }
+  ]
+}

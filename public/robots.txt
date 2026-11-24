@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imasjid.example.com/sitemap.xml
