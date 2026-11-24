@@ -29,7 +29,8 @@ in a browser that supports `beforeinstallprompt`.
 
 | Route | Purpose | Login |
 | --- | --- | --- |
-| `/` | Public landing + smart install CTA | No |
+| `/` | Public landing + smart install CTA (Emerald theme) | No |
+| `/rgb` | RGB + Islamic-architecture showcase landing | No |
 | `/app` | Web-view home (browse immediately) | No |
 | `/app/mosques` | Nearby mosque & surau finder | No |
 | `/app/programs` | Kuliah, programs & announcements feed | No |

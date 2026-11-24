@@ -51,6 +51,9 @@ export default function LandingPage() {
             </span>
           </Link>
           <nav className="header-actions" aria-label="Navigasi utama">
+            <Link href="/rgb" className="btn btn-quiet">
+              Tema RGB
+            </Link>
             <Link href="/admin" className="btn btn-quiet">
               Portal AJK
             </Link>
@@ -158,7 +161,10 @@ export default function LandingPage() {
         <div className="container site-footer__inner">
           <span>© {new Date().getFullYear()} iMasjid · Platform komuniti masjid & surau.</span>
           <span>
-            Dibina secara berasingan daripada sistem kiosk · Data demo untuk peringkat scaffold.
+            <Link href="/rgb" style={{ color: "var(--emerald)", fontWeight: 800 }}>
+              Lihat edisi RGB
+            </Link>{" "}
+            · Dibina secara berasingan daripada sistem kiosk · Data demo untuk peringkat scaffold.
           </span>
         </div>
       </footer>
