@@ -90,7 +90,7 @@ export default function RgbShowcasePage() {
             </span>
             <span>
               <span className={styles.brandName}>iMasjid</span>
-              <span className={styles.brandTag}>RGB edition</span>
+              <span className={styles.brandTag}>by skywalker</span>
             </span>
           </Link>
           <nav className={styles.nav} aria-label="Navigasi paparan RGB">
@@ -188,7 +188,7 @@ export default function RgbShowcasePage() {
 
         <section className={styles.section} id="pasang">
           <div className={styles.sectionInner}>
-            <h2 className={styles.sectionTitle}>Pasang dengan mudah</h2>
+            <h2 className={styles.sectionTitle}>Install dengan mudah</h2>
             <p className={styles.sectionLead}>
               Sama seperti edisi Emerald, anda boleh pasang terus dari laman web ini — pada Android
               mahupun iPhone.
@@ -221,7 +221,7 @@ export default function RgbShowcasePage() {
 
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span>© {new Date().getFullYear()} iMasjid · RGB Islamic architecture edition.</span>
+          <span>© {new Date().getFullYear()} iMasjid by skywalker · Edisi RGB senibina Islam.</span>
           <span>
             <Link href="/">Kembali ke tema Emerald</Link> ·{" "}
             <Link href="/admin">Portal AJK</Link>
